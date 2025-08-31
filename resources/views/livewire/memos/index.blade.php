@@ -6,7 +6,7 @@ use App\Models\memo;
 state(['memos'=> fn()=> Memo::all()]);
 
 $create = function (){
-return redirect()->route('demos.create');    
+return redirect()->route('memos.create');    
 };
 
 
@@ -23,5 +23,5 @@ return redirect()->route('demos.create');
         @endforeach
     </ul>
 
-    <button wire:clicl="create">登録する</button>
+    <button wire:click="create">登録する</button>
 </div>

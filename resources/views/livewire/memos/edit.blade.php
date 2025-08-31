@@ -1,6 +1,6 @@
 <?php
 
-use function Livewire\Volt\{state,mount};
+use function Livewire\Volt\{state,mount,rules};
 use App\Models\Memo;
 
 state(['memo','title','body']);
@@ -10,8 +10,14 @@ mount(function(Memo $memo){
     $this->title= $memo->title;
     $this->body = $memo->body;
 });
+rules([
+    'title' => 'required|string|max:50',
+    'body' => 'required|string|max:2000',
+]);
+
 //ルートバインディング
 $update = function(){
+    $this->validate();//バリデーションチェック
     $this->memo->update($this->all());
     return redirect()->route('memos.show',$this->memo);
     
@@ -24,11 +30,19 @@ $update = function(){
     <h1>更新</h1>
     <form wire:submit="update">
         <p>
-            <label for='title'>タイトル</label><br>
+            <label for='title'>タイトル</label>
+            @error('title')
+                <span class='error'>({{ $message}})</span>
+            @enderror
+            <br>
             <input type="text" wire:model='title' id="title">
         </p>
         <p>
-            <label for='body'>本文</label><br>
+            <label for='body'>本文</label>
+            @error('body')
+                <span class='error'>({{ $message}})</span>
+            @enderror
+            <br>
             <textarea wire:model="body" id="body"></textarea>
         </p>
         <button type="subimit">更新</button>
