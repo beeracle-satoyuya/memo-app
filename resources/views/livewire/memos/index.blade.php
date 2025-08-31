@@ -3,8 +3,12 @@
 use function Livewire\Volt\{state};
 use App\Models\memo;
 
-state(['memos'=> fn()=> Memo::all()])
-//
+state(['memos'=> fn()=> Memo::all()]);
+
+$create = function (){
+return redirect()->route('demos.create');    
+};
+
 
 ?>
 
@@ -18,4 +22,6 @@ state(['memos'=> fn()=> Memo::all()])
             </li>    
         @endforeach
     </ul>
+
+    <button wire:clicl="create">登録する</button>
 </div>
