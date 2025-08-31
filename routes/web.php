@@ -8,4 +8,6 @@ Route::get('/', function () {
 });
 
 // 詳細ページ
+Volt::route('/memos','memos.index')->name('memos.index');
+// 詳細ページ
 Volt::route('/memos/{memo}','memos.show')->name('memos.show');
