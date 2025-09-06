@@ -1,7 +1,7 @@
 <?php
 
 use function Livewire\Volt\{state};
-use App\Models\memo;
+use App\Models\Memo;
 
 state(['memos'=> fn()=> Memo::all()]);
 
